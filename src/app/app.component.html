@@ -1,1 +1,68 @@
-<h1 style="display: flex; justify-content: center; font-family: sans-serif;">NGX SIMULATOR</h1>
+<header class="header">
+    <div class="container header__inner">
+        <div class="logo">
+            <img class="logo__icon" src="/logo-rumtibet.svg" alt="logo-rumtibet">
+            <img class="logo__text" src="/logo-name.svg" alt="logo-name">
+        </div>
+        <div class="header__actions">
+            <nav class="nav">
+                <ul class="nav__list">
+                    <li class="nav__item"><a class="nav__link" href="#">Главная</a></li>
+                    <li class="nav__item"><a class="nav__link" href="#">Про гида</a></li>
+                    <li class="nav__item"><a class="nav__link" href="#">Программа тура</a></li>
+                    <li class="nav__item"><a class="nav__link" href="#">Стоимость</a></li>
+                    <li class="nav__item"><a class="nav__link" href="#">Блог</a></li>
+                    <li class="nav__item"><a class="nav__link" href="#">Контакты</a></li>
+                </ul>
+            </nav>
+            <button class="btn">Консультация</button>
+        </div>
+    </div>
+</header>
+<main id="main">
+    <section class="hero">
+        <div class="container hero__inner">
+            <h1 class="hero__tittle">Насладись прогулкой в горах <br> с командой единомышленников</h1>
+            <form class="search" action="#">
+                <div class="search__grid">
+                    <label class="field">
+                        <div class="field__control">
+                            <select class="field__input field__select" name="location" required>
+                                <option value="" disabled selected>Локация для тура</option>
+                                <option value="altai">Алтай</option>
+                                <option value="caucasus">Кавказ</option>
+                                <option value="baikal">Байкал</option>
+                            </select>
+                            <img class="field__icon" src="/arrow-down.svg" alt="">
+                        </div>
+                        <span class="field__hint">выберите из списка</span>
+                    </label>
+                    <label class="field">
+                        <div class="field__control">
+                            <input class="field__input" type="date" name="date">
+                            <img class="field__icon" src="/formkit-date.svg" alt="">
+                        </div>
+                        <span class="field__hint">укажите диапазон</span>
+                    </label>
+                    <label class="field">
+                        <div class="field__control">
+                            <select class="field__input field__select" name="people" required>
+                                <option value="4" selected>Участники</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8+</option>
+                            </select>
+                            <img class="field__icon" src="/arrow-down.svg" alt="">
+                        </div>
+                        <span class="field__hint">минимум 4 человека</span>
+                    </label>
+                    <div class="search__submit">
+                        <button class="btn btn--light" type="submit">Найти программу</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>

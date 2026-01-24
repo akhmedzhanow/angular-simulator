@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+@import "fonts";
+
+* {
+    margin: 0;
+    font-family: 'Nunito Sans';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 18px;
+}
+
+:root {
+  --black-color: #000000;
+  --white-color: #FFFFFF;
+  --secondary-color: #1A3E3E;
+}

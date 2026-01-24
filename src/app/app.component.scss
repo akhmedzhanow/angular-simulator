@@ -1,0 +1,205 @@
+.header {
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+    padding: 16px 0;
+}
+
+.header__inner {
+    width: 1080px;
+    height: 72px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo__icon {
+    display: block;
+    width: 137px;
+    height: auto;
+}
+
+.header__actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 49px;
+}
+
+.nav {
+    justify-self: center;
+}
+
+.nav__list {
+    display: flex;
+    gap: 24px;
+    list-style: none;
+    align-items: center;
+}
+
+.nav__link {
+    display: inline-flex;
+    color: var(--white-color);
+    text-decoration: none;
+}
+
+.btn {
+    width: 157px;
+    height: 44px;
+    border-radius: 4px;
+    border: none;
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.hero {
+    width: 100%;
+    height: 985px;
+    background-image: url(/bg-image.png);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.hero__tittle {
+    width: 1080px;
+    height: 150px;
+    position: absolute;
+    top: 551px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--white-color);
+    font-family: "Nunito Sans";
+    font-weight: 400;
+    font-style: normal;
+    font-size: 50px;
+    line-height: 150%;
+    text-transform: uppercase;
+    text-align: left;
+}
+
+.search {
+    position: absolute;
+    top: 742px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1080px;
+    z-index: 2;
+}
+
+.search__grid {
+    height: 161px;
+    padding: 40px;
+    border-radius: 10px;
+    box-sizing: border-box;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.20);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: grid;
+    grid-template-columns: 220px 220px 220px 213px;
+    gap: 24px;
+    justify-content: center;
+}
+
+.field {
+    display: block;
+}
+
+.field__control {
+    position: relative;
+}
+
+.field__input {
+    width: 100%;
+    height: 44px;
+    border-radius: 6px;
+    padding: 0 40px 0 16px;
+    box-sizing: border-box;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.10);
+    color: var(--white-color);
+    font-family: "Nunito Sans";
+    font-weight: 600;
+    font-style: normal;
+    font-size: 14px;
+    outline: none;
+}
+
+.field__input::placeholder {
+    color: var(--white-color);
+}
+
+.field__input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+.field__select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+}
+
+.field__input:focus {
+    border-color: var(--white-color);
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.field__icon {
+    position: absolute;
+    top: 50%;
+    right: 14px;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+    opacity: 1px;
+}
+
+.field__hint {
+    display: block;
+    margin-top: 8px;
+    padding-left: 16px;
+    font-size: 12px;
+    line-height: 1px;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.search__submit {
+    display: flex;
+    align-items: flex-start;
+}
+
+.btn.btn--light {
+    height: 44px;
+    min-width: 213px;
+    padding: 16px 36px;
+    border-radius: 4px;
+    border: none;
+    background: var(--white-color);
+    color: var(--secondary-color);
+    font-family: 'Nunito Sans';
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+}
