@@ -24,8 +24,6 @@ function sum(a: number, b: number): number {
   return a + b;
 }
 
-console.log(sum(5, 7));
-
 function formatText(text: string, format: 'uppercase' | 'lowercase' | 'capitalize'): string {
   switch(format) {
     case 'uppercase':
@@ -42,20 +40,15 @@ function formatText(text: string, format: 'uppercase' | 'lowercase' | 'capitaliz
   }
 }
 
-console.log(formatText('Angular', 'uppercase'));
 
 function removeSymbol(text: string, symbol: string): string {
   return text.replaceAll(symbol, '');
 }
 
-console.log(removeSymbol('Angular!', '!'));
-
 const users: IUser[] = [
   { name: 'Галим', age: 27, email: 'Galim@mail.com' },
-  { name: 'Амиры', age: 35 },
+  { name: 'Амир', age: 35 },
   { name: 'Али', age: 21, email: 'Ali@mail.com' },
 ];
 
 const adults: IUser[] = users.filter((user: IUser) => user.age > 21);
-
-console.log(adults);
