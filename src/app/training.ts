@@ -47,9 +47,8 @@ function removeSymbol(text: string, symbol: string): string {
 
 const users: IUser[] = [
   { name: 'Галим', age: 27, email: 'Galim@mail.com' },
-  { name: 'Амиры', age: 35 },
+  { name: 'Амир', age: 35 },
   { name: 'Али', age: 21, email: 'Ali@mail.com' },
 ];
 
 const adults: IUser[] = users.filter((user: IUser) => user.age > 21);
-
