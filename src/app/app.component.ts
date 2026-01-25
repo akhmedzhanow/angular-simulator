@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import './training';
-import { Color } from '../enums/color';
+import { Color } from '../enums/Color';
 import { Collection } from './collection';
 
 @Component({
@@ -25,7 +25,7 @@ export class AppComponent {
   }
 
   isPrimaryColor(color: Color): boolean {
-    const primaryColors: Color[] = [Color.Red, Color.Green, Color.Blue];
+    const primaryColors: Color[] = [Color.RED, Color.GREEN, Color.BLUE];
     return primaryColors.includes(color);
   }
 

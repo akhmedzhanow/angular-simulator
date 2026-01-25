@@ -28,6 +28,11 @@
     height: auto;
 }
 
+.logo__text {
+    font-family: "Nunito Sans";
+    letter-spacing: 5px;
+}
+
 .header__actions {
     display: flex;
     align-items: center;
@@ -67,7 +72,7 @@
 .hero {
     width: 100%;
     height: 985px;
-    background-image: url(/bg-image.png);
+    background-image: url(/hero-bg.png);
     background-size: cover;
     background-position: center;
     position: relative;
