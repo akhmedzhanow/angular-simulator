@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import './training';
-import { Color } from '../enums/Color';
+import { Color } from '../enums/Сolor';
 import { Collection } from './collection';
 
 @Component({
