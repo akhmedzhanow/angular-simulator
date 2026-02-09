@@ -1,8 +1,7 @@
-export interface IOfferItem {
+export interface IOffer {
   id: number;
   title: string;
   text: string;
-  iconSrc: string;
-  iconAlt: string;
+  icon: string;
   iconModifier: 'green' | 'blue' | 'yellow';
 }

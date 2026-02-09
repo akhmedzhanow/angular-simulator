@@ -1,28 +1,25 @@
-import type { IOfferItem } from './Offer-item';
+import { IOffer } from '../interfaces/IOffer';
 
-export const Offers: IOfferItem[] = [
+export const offers: IOffer[] = [
   {
     id: 1,
     title: 'Опытный гид',
     text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-    iconSrc: '/guide-icon.svg',
-    iconAlt: 'guide-icon',
+    icon: 'guide-icon',
     iconModifier: 'green',
   },
   {
     id: 2,
     title: 'Безопасный поход',
     text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-    iconSrc: '/shield-icon.svg',
-    iconAlt: 'shield-icon',
+    icon: 'shield-icon',
     iconModifier: 'blue',
   },
   {
     id: 3,
     title: 'Лояльные цены',
     text: 'Для современного мира базовый вектор развития предполагает независимые способы реализации соответствующих условий активизации.',
-    iconSrc: '/price-icon.svg',
-    iconAlt: 'price-icon',
+    icon: 'price-icon',
     iconModifier: 'yellow',
   },
 ];

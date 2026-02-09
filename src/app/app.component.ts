@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import './training';
 import { Color } from '../enums/Сolor';
 import { Collection } from './collection';
-import { Offers } from '../interfaces/Offers';
-import type { IOfferItem } from '../interfaces/Offer-item';
+import { offers } from '../data/offers';
+import { IOffer } from '../interfaces/IOffer';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -15,14 +15,14 @@ import { FormsModule } from '@angular/forms';
 export class AppComponent {
 
   companyName: string = 'РУМТИБЕТ';
-  offers: IOfferItem[] = Offers;
-  location: string = '';
-  date: string = '';
-  people: string = '';
-  currenrDateName: string = '';
-  clickCount: number = 0;
-  showClock: boolean = true;
-  liveText = '';
+  offers: IOffer[] = offers;
+  selectedLocation: string = '';
+  selectedDate: string = '';
+  selectedPeopleCount: string = '';
+  currentDateTime: string = '';
+  counter: number = 0;
+  isClockVisible: boolean = true;
+  liveInputValue = '';
   isLoading: boolean = true;
   numberCollection: Collection<number> = new Collection<number>([1, 2, 3, 4, 5]);
   carCollection: Collection<string> = new Collection<string>(['BMW', 'Audi', 'Toyota']);
@@ -33,39 +33,35 @@ export class AppComponent {
     this.saveVisitCount();
     this.numberCollection.removeItem(2);
     this.carCollection.replaceItem(1, 'Mercedes');
-  }
-
-  ngOnInit(): void {
-    window.setTimeout((): void => {
+    setTimeout(() => {
       this.isLoading = false;
     }, 2000);
 
     this.startClock();
   }
 
-  ngOnDestroy(): void {
-    this.stopClock();
+  public onSearch(): void {
+    alert(
+      `Локация: ${this.selectedLocation || '—'}, ` +
+      `Дата: ${this.selectedDate || '—'}, ` +
+      `Участники: ${this.selectedPeopleCount || '—'}`
+    );
   }
 
-  onSearch(): void {
-    console.log({
-      location: this.location,
-      date: this.date,
-      people: this.people
-    });
+  increaseCounter(): void {
+    this.counter += 1;
   }
 
-  increase(): void {
-    this.clickCount += 1;
-  }
+  decreaseCounter(): void {
+    if (this.counter === 0) {
+      return;
+    }
 
-  decrease(): void {
-    if (this.clickCount === 0) return;
-    this.clickCount -= 1;
+    this.counter -= 1;
   }
 
   toggleHeaderWidget(): void {
-    this.showClock = !this.showClock;
+    this.isClockVisible = !this.isClockVisible;
   }
 
   isPrimaryColor(color: Color): boolean {
@@ -74,8 +70,7 @@ export class AppComponent {
   }
 
   private saveLastVisitDate(): void {
-    const currentDate: string = new Date().toString();
-    localStorage.setItem('lastVisitDate', currentDate);
+    localStorage.setItem('lastVisitDate', new Date().toString());
   }
 
   private saveVisitCount(): void {
@@ -84,29 +79,19 @@ export class AppComponent {
   }
 
   private startClock(): void {
-    this.updateDateName();
+    this.updateCurrentDateTime();
 
-    this.timerId = window.setInterval((): void => {
-      this.updateDateName();
+    if (this.timerId !== null) {
+      clearInterval(this.timerId);
+    }
+
+    this.timerId = setInterval(() => {
+      this.updateCurrentDateTime();
     }, 1000);
   }
 
-  private stopClock(): void {
-    if (this.timerId === null) return;
-    window.clearInterval(this.timerId);
-    this.timerId = null;
-  }
-
-  private updateDateName(): void {
-    const now: Date = new Date();
-    const dd: string = String(now.getDate()).padStart(2, '0');
-    const mm: string = String(now.getMonth() + 1).padStart(2, '0');
-    const yyyy: string = String(now.getFullYear());
-    const hh: string = String(now.getHours()).padStart(2, '0');
-    const min: string = String(now.getMinutes()).padStart(2, '0');
-    const ss: string = String(now.getSeconds()).padStart(2, '0');
-
-    this.currenrDateName = `${dd}.${mm}.${yyyy} ${hh}:${min}:${ss}`;
+  private updateCurrentDateTime(): void {
+    this.currentDateTime = new Date().toLocaleString('ru-RU').replace(',', '');
   }
   
 }
