@@ -106,7 +106,8 @@
                             class="live__input"
                             type="text"
                             placeholder="Пиши сюда…"
-                            [ngModel]="liveInputValue" (ngModelChange)="liveInputValue = $event" name="liveInputValue"
+                            name="liveInputValue"
+                            [(ngModel)]="liveInputValue"
                         />
                     </label>
                     <span id="live-text-value" class="live__value" aria-label="Введённый текст">{{ liveInputValue }}</span>

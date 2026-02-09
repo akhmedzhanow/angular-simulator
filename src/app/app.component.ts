@@ -22,25 +22,29 @@ export class AppComponent {
   currentDateTime: string = '';
   counter: number = 0;
   isClockVisible: boolean = true;
-  liveInputValue = '';
+  liveInputValue: string = '';
   isLoading: boolean = true;
   numberCollection: Collection<number> = new Collection<number>([1, 2, 3, 4, 5]);
   carCollection: Collection<string> = new Collection<string>(['BMW', 'Audi', 'Toyota']);
-  private timerId: number | null = null;
 
   constructor() {
     this.saveLastVisitDate();
     this.saveVisitCount();
     this.numberCollection.removeItem(2);
     this.carCollection.replaceItem(1, 'Mercedes');
+    this.currentTime();
+
+    setInterval(() => {
+      this.currentTime();
+    }, 1000);
+
     setTimeout(() => {
       this.isLoading = false;
     }, 2000);
 
-    this.startClock();
   }
 
-  public onSearch(): void {
+  onSearch(): void {
     alert(
       `Локация: ${this.selectedLocation || '—'}, ` +
       `Дата: ${this.selectedDate || '—'}, ` +
@@ -69,6 +73,10 @@ export class AppComponent {
     return primaryColors.includes(color);
   }
 
+  private currentTime(): void {
+    this.currentDateTime = new Date().toLocaleString('ru-RU').replace(',', '');
+  }
+
   private saveLastVisitDate(): void {
     localStorage.setItem('lastVisitDate', new Date().toString());
   }
@@ -76,22 +84,6 @@ export class AppComponent {
   private saveVisitCount(): void {
     const count: number = Number(localStorage.getItem('visitCount')) || 0;
     localStorage.setItem('visitCount', String(count + 1));
-  }
-
-  private startClock(): void {
-    this.updateCurrentDateTime();
-
-    if (this.timerId !== null) {
-      clearInterval(this.timerId);
-    }
-
-    this.timerId = setInterval(() => {
-      this.updateCurrentDateTime();
-    }, 1000);
-  }
-
-  private updateCurrentDateTime(): void {
-    this.currentDateTime = new Date().toLocaleString('ru-RU').replace(',', '');
   }
   
 }
