@@ -19,7 +19,7 @@ export class AppComponent {
   selectedLocation: string = '';
   selectedDate: string = '';
   selectedPeopleCount: string = '';
-  currentDateTime: string = '';
+  currentDateTime: string = new Date().toLocaleString('ru-RU').replace(',', '');
   counter: number = 0;
   isClockVisible: boolean = true;
   liveInputValue: string = '';
@@ -32,10 +32,9 @@ export class AppComponent {
     this.saveVisitCount();
     this.numberCollection.removeItem(2);
     this.carCollection.replaceItem(1, 'Mercedes');
-    this.currentTime();
 
     setInterval(() => {
-      this.currentTime();
+      this.updateCurrentDateTime();
     }, 1000);
 
     setTimeout(() => {
@@ -73,7 +72,7 @@ export class AppComponent {
     return primaryColors.includes(color);
   }
 
-  private currentTime(): void {
+  private updateCurrentDateTime(): void {
     this.currentDateTime = new Date().toLocaleString('ru-RU').replace(',', '');
   }
 
