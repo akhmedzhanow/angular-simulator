@@ -3,6 +3,6 @@ export interface IPopularDirection {
   img: string;
   title: string;
   subtitle?: string;
-  rating?: number;
-  price?: number;
+  rating: number;
+  price: number;
 }

@@ -1,7 +1,7 @@
-import { Message } from '../enums/Message';
+import { StatusMessageType } from '../enums/StatusMessageType';
 
 export interface IStatusMessage {
   id: number;
   text: string;
-  type: Message;
+  type: StatusMessageType;
 }

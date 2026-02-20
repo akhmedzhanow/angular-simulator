@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Message } from './enums/Message';
+import { StatusMessageType } from './enums/StatusMessageType';
 import { IStatusMessage } from './interfaces/IStatusMessage';
 
 type TimerItem = {
@@ -17,7 +17,7 @@ export class NotificationService {
     return this.messagesList;
   }
 
-  addMessage(type: Message, text: string): void {
+  addMessage(type: StatusMessageType, text: string): void {
     const id = ++this.lastId;
 
     this.messagesList.unshift({ id, type, text });
@@ -41,4 +41,5 @@ export class NotificationService {
       this.messagesList.splice(msgIndex, 1);
     }
   }
+
 }

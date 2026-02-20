@@ -6,7 +6,7 @@ import { Collection } from './collection';
 import { offers } from '../data/offers';
 import { IOffer } from '../interfaces/IOffer';
 import { FormsModule } from '@angular/forms';
-import { Message } from '../enums/Message';
+import { StatusMessageType } from '../enums/StatusMessageType';
 import { DirectionKind } from '../enums/DirectionKind';
 import { IPopularDirection } from '../interfaces/IPopularDirection';
 import { popularDirections } from '../data/popularDirections';
@@ -22,6 +22,7 @@ import { NotificationService } from '../notification.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+
   companyName: string = 'РУМТИБЕТ';
   offers: IOffer[] = offers;
 
@@ -43,13 +44,13 @@ export class AppComponent {
   cards: IPopularDirection[] = popularDirections;
   blogPosts: IBlogPost[] = blogPosts;
 
-  readonly Message = Message;
+  readonly StatusMessageType = StatusMessageType;
   readonly DirectionKind = DirectionKind;
 
   private clockIntervalId!: ReturnType<typeof setInterval>;
   private loadingTimerId!: ReturnType<typeof setTimeout>;
 
-  constructor(public readonly notificationService: NotificationService, private readonly storage: LocalStorageService) {
+  constructor(readonly notificationService: NotificationService, private readonly storage: LocalStorageService) {
     this.saveLastVisitDate();
     this.saveVisitCount();
 
@@ -80,7 +81,9 @@ export class AppComponent {
   }
 
   decreaseCounter(): void {
-    if (this.counter === 0) return;
+    if (this.counter === 0) {
+      return;
+    }
     this.counter -= 1;
   }
 
@@ -94,19 +97,19 @@ export class AppComponent {
   }
 
   showSuccessMsg(): void {
-    this.notificationService.addMessage(Message.SUCCESS, 'Направления получены');
+    this.notificationService.addMessage(StatusMessageType.SUCCESS, 'Направления получены');
   }
 
   showInfoMsg(): void {
-    this.notificationService.addMessage(Message.INFO, 'Стоимость отправлена на почту');
+    this.notificationService.addMessage(StatusMessageType.INFO, 'Стоимость отправлена на почту');
   }
 
   showWarnMsg(): void {
-    this.notificationService.addMessage(Message.WARN, 'Программа недоступна');
+    this.notificationService.addMessage(StatusMessageType.WARN, 'Программа недоступна');
   }
 
   showErrorMsg(): void {
-    this.notificationService.addMessage(Message.ERROR, 'Материалы недоступны');
+    this.notificationService.addMessage(StatusMessageType.ERROR, 'Материалы недоступны');
   }
 
   private updateCurrentDateTime(): void {
@@ -121,4 +124,5 @@ export class AppComponent {
     const count = this.storage.getValue<number>('visitCount') ?? 0;
     this.storage.setValue<number>('visitCount', count + 1);
   }
+
 }

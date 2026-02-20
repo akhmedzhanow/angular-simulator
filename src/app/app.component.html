@@ -8,7 +8,7 @@
 } @else {
     <div class="page">
         <div class="notification-stack" aria-live="polite" aria-relevant="additions removals">
-            @for (message of notificationService.messages ; track message.id) {
+            @for (message of notificationService.messages; track message.id) {
                 <ng-container
                     [ngTemplateOutlet]="messageTpl"
                     [ngTemplateOutletContext]="{ $implicit: message }"
@@ -16,9 +16,9 @@
             }
         </div>
         <ng-template #messageTpl let-message>
-            <div class="notification" [class]="'notification notification--' + message.type">
+            <div class="notification" [class]="'notification--' + message.type">
                 <div class="notification__icon" aria-hidden="true">
-                    <img src="/message-icon.svg" alt="" width="40" height="40" />
+                    <img src="/message-icon.svg" alt="message-icon" width="40" height="40" />
                 </div>
 
                 <div class="notification__body">
@@ -31,7 +31,7 @@
                     aria-label="Закрыть"
                     (click)="notificationService.closeMessage(message.id)"
                 >
-                    <img src="/close-icon.svg" alt="" width="20" height="20" />
+                    <img src="/close-icon.svg" alt="close-icon" width="20" height="20" />
                 </button>
             </div>
         </ng-template>
@@ -214,7 +214,7 @@
                             <article class="card">
                                 <img class="card__img" [src]="'/' + card.img + '.png'" [alt]="card.title"/>
                                 <div class="card__rating">
-                                    <span class="card__star">★</span>
+                                    <img class="card__star" src="/star-icon.svg" alt="star-icon" width="24" height="24">
                                     <span class="card__rating-value">{{ card.rating }}</span>
                                 </div>
                                 <div class="card__bottom">
@@ -228,7 +228,7 @@
                         }
                     </div>
                     <div class="popular__actions">
-                        <button class="popular__btn" type="button" (click)="showSuccessMsg()">Рейтинг направлений</button>
+                        <button id="popular-rating-button" class="popular__btn" type="button" (click)="showSuccessMsg()">Рейтинг направлений</button>
                     </div>
                 </div>
             </section>
@@ -247,14 +247,14 @@
                                     <p class="blog-card__text">{{ post.text }}</p>
                                     <div class="blog-card__footer">
                                         <time class="blog-card__date">{{ post.date }}</time>
-                                        <a class="blog-card__more" href="#">читать статью</a>
+                                        <a id="blog-post-more-link" class="blog-card__more" href="#">читать статью</a>
                                     </div>
                                 </div>
                             </article>
                         }
                     </div>
                     <div class="blog__actions">
-                        <button class="blog__btn" type="button" (click)="showErrorMsg()">Другие материалы</button>
+                        <button id="blog-more-materials-button" class="blog__btn" type="button" (click)="showErrorMsg()">Другие материалы</button>
                     </div>
                 </div>
             </section>
