@@ -657,18 +657,17 @@
 
 .popular__btn {
     width: 244px;
-  height: 52px;
-  padding: 16px 36px;
-  gap: 10px;
-  border: none;
-  border-radius: 4px;
-  background: var(--secondary-color);
-  color: var(--white-color);
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 600;
-  cursor: pointer;
-
+    height: 52px;
+    padding: 16px 36px;
+    gap: 10px;
+    border: none;
+    border-radius: 4px;
+    background: var(--secondary-color);
+    color: var(--white-color);
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 .popular__btn:hover {
@@ -699,15 +698,12 @@
   right: 16px;
   height: 32px;
   padding: 0 10px;
-
   display: inline-flex;
   align-items: center;
   gap: 8px;
-
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(6px);
-
 }
 
 .card__star {
@@ -721,7 +717,6 @@
   color: var(--black-color);
   font-weight: 800;
   font-size: 14px;
-
 }
 
 .card__bottom {
@@ -730,23 +725,18 @@
   right: 0;
   bottom: 0;
   height: 90px;
-
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-
   padding: 18px 20px;
-
   background: rgba(0, 0, 0, 0.28);
   backdrop-filter: blur(10px);
-
 }
 
 .card__text {
   text-align: left;
   min-width: 0;
-
 }
 
 .card__name {
@@ -755,11 +745,9 @@
   line-height: 120%;
   font-weight: 700;
   color: var(--white-color);
-
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-
 }
 
 .card__desc {
@@ -767,7 +755,6 @@
   font-size: 14px;
   line-height: 18px;
   color: var(--white-color)
-
 }
 
 .card__price {
@@ -775,16 +762,13 @@
   min-width: 86px;
   height: 40px;
   padding: 0 14px;
-
   display: inline-flex;
   align-items: center;
   justify-content: center;
-
   border-radius: 10px;
   background: rgba(255, 255, 255, 0.24);
   color: var(--white-color);
   font-weight: 800;
-
 }
 
 .blog {
@@ -804,7 +788,6 @@
   padding: 16px;
   display: flex;
   gap: 24px;
-
   background: var(--white-color);
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(24, 18, 30, 0.12);
@@ -845,7 +828,6 @@
   line-height: 1.45;
   color: var(--black-color);
   opacity: 0.85;
-
   overflow: hidden;
   display: -webkit-box;
   -webkit-line-clamp: 5;
@@ -879,17 +861,17 @@
 
 .blog__btn {
     width: 220px;
-  height: 52px;
-  padding: 16px 36px;
-  gap: 10px;
-  border: none;
-  border-radius: 4px;
-  background: var(--secondary-color);
-  color: var(--white-color);
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 600;
-  cursor: pointer;
+    height: 52px;
+    padding: 16px 36px;
+    gap: 10px;
+    border: none;
+    border-radius: 4px;
+    background: var(--secondary-color);
+    color: var(--white-color);
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 .notification-stack {
@@ -909,7 +891,6 @@
   background-color: #0F172A99;
   border: 1px solid #000;
   color: var(--primary-color);
-
   display: flex;
   align-items: center;
   gap: 15px;

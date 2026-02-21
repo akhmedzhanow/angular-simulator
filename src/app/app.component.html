@@ -8,33 +8,13 @@
 } @else {
     <div class="page">
         <div class="notification-stack" aria-live="polite" aria-relevant="additions removals">
-            @for (message of notificationService.messages; track message.id) {
+            @for (msg of messages; track msg) {
                 <ng-container
                     [ngTemplateOutlet]="messageTpl"
-                    [ngTemplateOutletContext]="{ $implicit: message }"
+                    [ngTemplateOutletContext]="{ type: msg.type, text: msg.text, msg: msg }"
                 />
             }
         </div>
-        <ng-template #messageTpl let-message>
-            <div class="notification" [class]="'notification--' + message.type">
-                <div class="notification__icon" aria-hidden="true">
-                    <img src="/message-icon.svg" alt="message-icon" width="40" height="40" />
-                </div>
-
-                <div class="notification__body">
-                    <div class="notification__title">{{ message.type }}</div>
-                    <div class="notification__text">{{ message.text }}</div>
-                </div>
-                <button
-                    class="notification__close"
-                    type="button"
-                    aria-label="Закрыть"
-                    (click)="notificationService.closeMessage(message.id)"
-                >
-                    <img src="/close-icon.svg" alt="close-icon" width="20" height="20" />
-                </button>
-            </div>
-        </ng-template>
         <header class="header">
             <div class="container header__inner">
                 <div class="logo">
@@ -169,7 +149,7 @@
                             то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, 
                             штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками 
                             в классической латинской литературе.</p>
-                        <button class="tour-about__button" type="button" (click)="showSuccessMsg()">Программа тура</button>
+                        <button class="tour-about__button" type="button" (click)="showWarnMsg('Программа недоступна')">Программа тура</button>
                     </div>
                 </div>
             </section>
@@ -195,7 +175,7 @@
                                 </li>
                             }
                         </ul>
-                        <button class="offer__button" type="button" (click)="showInfoMsg()">Стоимость программ</button>
+                        <button class="offer__button" type="button" (click)="showInfoMsg('Стоимость отправлена на почту')">Стоимость программ</button>
                     </div>
                     <div class="offer__gallery">
                         <img class="offer__photo offer__photo--tl" src="/hand-with-coffee.png" alt="hand-with-coffee">
@@ -228,7 +208,7 @@
                         }
                     </div>
                     <div class="popular__actions">
-                        <button id="popular-rating-button" class="popular__btn" type="button" (click)="showSuccessMsg()">Рейтинг направлений</button>
+                        <button id="popular-rating-button" class="popular__btn" type="button" (click)="showSuccessMsg('Направления получены')">Рейтинг направлений</button>
                     </div>
                 </div>
             </section>
@@ -254,10 +234,29 @@
                         }
                     </div>
                     <div class="blog__actions">
-                        <button id="blog-more-materials-button" class="blog__btn" type="button" (click)="showErrorMsg()">Другие материалы</button>
+                        <button id="blog-more-materials-button" class="blog__btn" type="button" (click)="showErrorMsg('Материалы недоступны')">Другие материалы</button>
                     </div>
                 </div>
             </section>
         </main>
     </div>
 }
+<ng-template #messageTpl let-type="type" let-text="text" let-msg="msg">
+    <div class="notification" [class]="'notification notification--' + type">
+        <div class="notification__icon" aria-hidden="true">
+            <img src="/message-icon.svg" alt="" width="40" height="40" />
+        </div>
+        <div class="notification__body">
+            <div class="notification__title">{{ type }}</div>
+            <div class="notification__text">{{ text }}</div>
+        </div>
+        <button
+            class="notification__close"
+            type="button"
+            aria-label="Закрыть"
+            (click)="closeMsg(msg)"
+        >
+            <img src="/close-icon.svg" alt="" width="20" height="20" />
+        </button>
+    </div>
+</ng-template>

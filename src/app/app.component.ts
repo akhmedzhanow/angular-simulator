@@ -1,19 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import './training';
 import { Color } from '../enums/Сolor';
+import { Message } from '../enums/Message';
+import { IMessage } from '../interfaces/IMessage';
 import { Collection } from './collection';
 import { offers } from '../data/offers';
-import { IOffer } from '../interfaces/IOffer';
-import { FormsModule } from '@angular/forms';
-import { StatusMessageType } from '../enums/StatusMessageType';
-import { DirectionKind } from '../enums/DirectionKind';
-import { IPopularDirection } from '../interfaces/IPopularDirection';
 import { popularDirections } from '../data/popularDirections';
-import { IBlogPost } from '../interfaces/IBlogPost';
 import { blogPosts } from '../data/blogPosts';
+import { IOffer } from '../interfaces/IOffer';
+import { IPopularDirection } from '../interfaces/IPopularDirection';
+import { IBlogPost } from '../interfaces/IBlogPost';
 import { LocalStorageService } from '../local-storage.service';
-import { NotificationService } from '../notification.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-root',
@@ -25,32 +25,24 @@ export class AppComponent {
 
   companyName: string = 'РУМТИБЕТ';
   offers: IOffer[] = offers;
-
+  cards: IPopularDirection[] = popularDirections;
+  blogPosts: IBlogPost[] = blogPosts;
   selectedLocation: string = '';
   selectedDate: string = '';
   selectedPeopleCount: string = '';
-
-  currentDateTime!: string;
+  currentDateTime: string = '';
   counter: number = 0;
   isClockVisible: boolean = true;
-
   liveInputValue: string = '';
   isLoading: boolean = true;
-
   numberCollection: Collection<number> = new Collection<number>([1, 2, 3, 4, 5]);
   carCollection: Collection<string> = new Collection<string>(['BMW', 'Audi', 'Toyota']);
+  Message: typeof Message = Message;
+  messageService = inject(MessageService);
 
-  popularDirectionsError: string | null = null;
-  cards: IPopularDirection[] = popularDirections;
-  blogPosts: IBlogPost[] = blogPosts;
+  private localStorageService = inject(LocalStorageService);
 
-  readonly StatusMessageType = StatusMessageType;
-  readonly DirectionKind = DirectionKind;
-
-  private clockIntervalId!: ReturnType<typeof setInterval>;
-  private loadingTimerId!: ReturnType<typeof setTimeout>;
-
-  constructor(readonly notificationService: NotificationService, private readonly storage: LocalStorageService) {
+  constructor() {
     this.saveLastVisitDate();
     this.saveVisitCount();
 
@@ -59,11 +51,9 @@ export class AppComponent {
 
     this.updateCurrentDateTime();
 
-    this.clockIntervalId = setInterval(() => {
-      this.updateCurrentDateTime();
-    }, 1000);
+    setInterval(() => this.updateCurrentDateTime(), 1000);
 
-    this.loadingTimerId = setTimeout(() => {
+    setTimeout(() => {
       this.isLoading = false;
     }, 2000);
   }
@@ -71,8 +61,8 @@ export class AppComponent {
   onSearch(): void {
     alert(
       `Локация: ${this.selectedLocation || '—'}, ` +
-      `Дата: ${this.selectedDate || '—'}, ` +
-      `Участники: ${this.selectedPeopleCount || '—'}`
+        `Дата: ${this.selectedDate || '—'}, ` +
+        `Участники: ${this.selectedPeopleCount || '—'}`
     );
   }
 
@@ -81,9 +71,7 @@ export class AppComponent {
   }
 
   decreaseCounter(): void {
-    if (this.counter === 0) {
-      return;
-    }
+    if (this.counter === 0) return;
     this.counter -= 1;
   }
 
@@ -96,20 +84,28 @@ export class AppComponent {
     return primaryColors.includes(color);
   }
 
-  showSuccessMsg(): void {
-    this.notificationService.addMessage(StatusMessageType.SUCCESS, 'Направления получены');
+  get messages(): IMessage[] {
+    return this.messageService.messages;
   }
 
-  showInfoMsg(): void {
-    this.notificationService.addMessage(StatusMessageType.INFO, 'Стоимость отправлена на почту');
+  showWarnMsg(text: string): void {
+    this.messageService.addMessage(Message.WARN, text);
   }
 
-  showWarnMsg(): void {
-    this.notificationService.addMessage(StatusMessageType.WARN, 'Программа недоступна');
+  showInfoMsg(text: string): void {
+    this.messageService.addMessage(Message.INFO, text);
   }
 
-  showErrorMsg(): void {
-    this.notificationService.addMessage(StatusMessageType.ERROR, 'Материалы недоступны');
+  showErrorMsg(text: string): void {
+    this.messageService.addMessage(Message.ERROR, text);
+  }
+
+  showSuccessMsg(text: string): void {
+    this.messageService.addMessage(Message.SUCCESS, text);
+  }
+
+  closeMsg(message: IMessage): void {
+    this.messageService.closeMessage(message);
   }
 
   private updateCurrentDateTime(): void {
@@ -117,12 +113,20 @@ export class AppComponent {
   }
 
   private saveLastVisitDate(): void {
-    this.storage.setValue<string>('lastVisitDate', new Date().toString());
+    this.localStorageService.setValue('lastVisitDate', new Date().toString());
   }
 
   private saveVisitCount(): void {
-    const count = this.storage.getValue<number>('visitCount') ?? 0;
-    this.storage.setValue<number>('visitCount', count + 1);
+    const raw: unknown | null = this.localStorageService.getValue('visitCount');
+
+    const count: number =
+      typeof raw === 'number'
+        ? raw
+        : typeof raw === 'string'
+          ? Number(raw) || 0
+          : 0;
+
+    this.localStorageService.setValue('visitCount', count + 1);
   }
 
 }
