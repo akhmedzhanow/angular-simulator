@@ -52,7 +52,7 @@
                         </div>
                     </div>
                 </div>
-         </div>
+            </div>
         </header>
         <main id="main">
             <section class="hero">
@@ -94,7 +94,7 @@
                                 <span class="field__hint">выберите из списка</span>
                             </label>
                             <div class="search__submit">
-                                <button id="tour-search-submit-button" class="btn btn--light" type="submit" [disabled]="searchForm.invalid">Найти программу</button>
+                                <button id="tour-search-submit-button" class="btn btn--light" type="submit" [disabled]="searchForm.invalid" >Найти программу</button>
                             </div>
                         </div>
                     </form>
@@ -141,7 +141,7 @@
                             то есть более двух тысячелетий назад. Ричард МакКлинток, профессор латыни из колледжа Hampden-Sydney, 
                             штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum, "consectetur"и занялся его поисками 
                             в классической латинской литературе.</p>
-                        <button class="tour-about__button" type="button">Программа тура</button>
+                        <button class="tour-about__button" type="button" (click)="messageService.showWarn('Программа недоступна')">Программа тура</button>
                     </div>
                 </div>
             </section>
@@ -167,7 +167,7 @@
                                 </li>
                             }
                         </ul>
-                        <button class="offer__button" type="button">Стоимость программ</button>
+                        <button class="offer__button" type="button" (click)="messageService.showInfo('Стоимость отправлена на почту')">Стоимость программ</button>
                     </div>
                     <div class="offer__gallery">
                         <img class="offer__photo offer__photo--tl" src="/hand-with-coffee.png" alt="hand-with-coffee">
@@ -177,6 +177,86 @@
                     </div>
                 </div>
             </section>
+            <section class="popular">
+                <div class="section-head">
+                    <p class="section-head__kicker">по версии отдыхающих</p>
+                    <h2 class="section-head__title">Популярные направления</h2>
+                    <div class="popular__cards">
+                        @for (card of cards; track card.id) {
+                            <article class="card">
+                                <img class="card__img" [src]="'/' + card.img + '.png'" [alt]="card.title"/>
+                                <div class="card__rating">
+                                    <img class="card__star" src="/star-icon.svg" alt="star-icon" width="24" height="24">
+                                    <span class="card__rating-value">{{ card.rating }}</span>
+                                </div>
+                                <div class="card__bottom">
+                                    <div class="card__text">
+                                        <h3 class="card__name">{{ card.title }}</h3>
+                                        <p class="card__desc">{{ card.subtitle }}</p>
+                                    </div>
+                                    <div class="card__price">{{ card.price }} $</div>
+                                </div>
+                            </article>
+                        }
+                    </div>
+                    <div class="popular__actions">
+                        <button id="popular-rating-button" class="popular__btn" type="button" (click)="messageService.showSuccess('Направления получены')">Рейтинг направлений</button>
+                    </div>
+                </div>
+            </section>
+            <section class="blog">
+                <div class="section-head">
+                    <p class="section-head__kicker">делимся впечатлениями</p>
+                    <h2 class="section-head__title">Блог о путешествиях</h2>
+                    <div class="blog__grid">
+                        @for (post of blogPosts; track post.id) {
+                            <article class="blog-card">
+                                <div class="blog-card__media">
+                                    <img class="blog-card__img" [src]="'/' + post.img + '.png'" [alt]="post.title">
+                                </div>
+                                <div class="blog-card__content">
+                                    <h3 class="blog-card__heading">{{ post.title }}</h3>
+                                    <p class="blog-card__text">{{ post.text }}</p>
+                                    <div class="blog-card__footer">
+                                        <time class="blog-card__date">{{ post.date }}</time>
+                                        <a id="blog-post-more-link" class="blog-card__more" href="#">читать статью</a>
+                                    </div>
+                                </div>
+                            </article>
+                        }
+                    </div>
+                    <div class="blog__actions">
+                        <button id="blog-more-materials-button" class="blog__btn" type="button" (click)="messageService.showError('Материалы недоступны')">Другие материалы</button>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 }
+<div class="notification-stack" aria-live="polite" aria-relevant="additions removals">
+    @for (msg of messageService.messages; track msg) {
+        <ng-container
+            [ngTemplateOutlet]="messageTpl"
+            [ngTemplateOutletContext]="{ msg: msg }"
+        />
+    }
+</div>
+<ng-template #messageTpl let-type="type" let-text="text" let-msg="msg">
+    <div class="notification" [class]="'notification notification--' + type">
+        <div class="notification__icon" aria-hidden="true">
+            <img src="/message-icon.svg" alt="" width="40" height="40" />
+        </div>
+        <div class="notification__body">
+            <div class="notification__title">{{ msg.type }}</div>
+            <div class="notification__text">{{ msg.text }}</div>
+        </div>
+        <button
+            class="notification__close"
+            type="button"
+            aria-label="Закрыть"
+            (click)="messageService.closeMessage(msg)"
+        >
+            <img src="/close-icon.svg" alt="" width="20" height="20" />
+        </button>
+    </div>
+</ng-template>

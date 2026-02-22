@@ -14,3 +14,24 @@
   --secondary-color: #1A3E3E;
   --yellow-color: #F2BE22;
 }
+
+.section-head {
+  text-align: center;
+}
+
+.section-head__kicker {
+  margin: 0 0 8px;
+  font-size: 24px;
+  line-height: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--yellow-color);
+}
+
+.section-head__title {
+  margin: 0 0 40px;
+  font-size: 32px;
+  line-height: 120%;
+  font-weight: 800;
+  color: var(--black-color);
+}
