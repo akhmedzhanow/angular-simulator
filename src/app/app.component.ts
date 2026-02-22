@@ -4,7 +4,6 @@ import { FormsModule } from '@angular/forms';
 import './training';
 import { Color } from '../enums/Сolor';
 import { Message } from '../enums/Message';
-import { IMessage } from '../interfaces/IMessage';
 import { Collection } from './collection';
 import { offers } from '../data/offers';
 import { popularDirections } from '../data/popularDirections';
@@ -23,6 +22,8 @@ import { MessageService } from '../message.service';
 })
 export class AppComponent {
 
+  messageService: MessageService = inject(MessageService);
+  private localStorageService: LocalStorageService = inject(LocalStorageService);
   companyName: string = 'РУМТИБЕТ';
   offers: IOffer[] = offers;
   cards: IPopularDirection[] = popularDirections;
@@ -37,20 +38,15 @@ export class AppComponent {
   isLoading: boolean = true;
   numberCollection: Collection<number> = new Collection<number>([1, 2, 3, 4, 5]);
   carCollection: Collection<string> = new Collection<string>(['BMW', 'Audi', 'Toyota']);
-  Message: typeof Message = Message;
-  messageService = inject(MessageService);
-
-  private localStorageService = inject(LocalStorageService);
+  message: typeof Message = Message;
 
   constructor() {
     this.saveLastVisitDate();
     this.saveVisitCount();
-
     this.numberCollection.removeItem(2);
     this.carCollection.replaceItem(1, 'Mercedes');
-
     this.updateCurrentDateTime();
-
+    
     setInterval(() => this.updateCurrentDateTime(), 1000);
 
     setTimeout(() => {
@@ -61,8 +57,8 @@ export class AppComponent {
   onSearch(): void {
     alert(
       `Локация: ${this.selectedLocation || '—'}, ` +
-        `Дата: ${this.selectedDate || '—'}, ` +
-        `Участники: ${this.selectedPeopleCount || '—'}`
+      `Дата: ${this.selectedDate || '—'}, ` +
+      `Участники: ${this.selectedPeopleCount || '—'}`
     );
   }
 
@@ -71,7 +67,10 @@ export class AppComponent {
   }
 
   decreaseCounter(): void {
-    if (this.counter === 0) return;
+    if (this.counter === 0) {
+      return;
+    }
+
     this.counter -= 1;
   }
 
@@ -84,30 +83,6 @@ export class AppComponent {
     return primaryColors.includes(color);
   }
 
-  get messages(): IMessage[] {
-    return this.messageService.messages;
-  }
-
-  showWarnMsg(text: string): void {
-    this.messageService.addMessage(Message.WARN, text);
-  }
-
-  showInfoMsg(text: string): void {
-    this.messageService.addMessage(Message.INFO, text);
-  }
-
-  showErrorMsg(text: string): void {
-    this.messageService.addMessage(Message.ERROR, text);
-  }
-
-  showSuccessMsg(text: string): void {
-    this.messageService.addMessage(Message.SUCCESS, text);
-  }
-
-  closeMsg(message: IMessage): void {
-    this.messageService.closeMessage(message);
-  }
-
   private updateCurrentDateTime(): void {
     this.currentDateTime = new Date().toLocaleString('ru-RU').replace(',', '');
   }
@@ -117,16 +92,8 @@ export class AppComponent {
   }
 
   private saveVisitCount(): void {
-    const raw: unknown | null = this.localStorageService.getValue('visitCount');
-
-    const count: number =
-      typeof raw === 'number'
-        ? raw
-        : typeof raw === 'string'
-          ? Number(raw) || 0
-          : 0;
-
-    this.localStorageService.setValue('visitCount', count + 1);
+    const count: number = this.localStorageService.getValue<number>('visitCount') ?? 0;
+    this.localStorageService.setValue<number>('visitCount', count + 1);
   }
 
 }
