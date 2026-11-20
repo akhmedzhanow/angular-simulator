@@ -1,0 +1,280 @@
+@font-face {
+  font-family: 'Nunito Sans';
+  src: url('../assets/fonts/NunitoSans-VariableFont_YTLC,opsz,wdth,wght.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 200 1000;
+  font-display: swap;
+}
+
+.site-header {
+  height: 120px;
+  background-color: rgba(24, 18, 30, 0.5);
+  color: #fdfdfd;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.page-top {
+  min-height: 985px;
+  background: url('/rumtibet-hero.png') center top / cover no-repeat;
+}
+
+.hero {
+  min-height: 865px;
+  color: #fdfdfd;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+.hero__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding-top: 431px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 50px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.tour-search {
+  min-height: 161px;
+  margin-top: 41px;
+  padding: 40px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.tour-search__field {
+  width: 270px;
+  flex-shrink: 0;
+  font-size: 14px;
+}
+
+.tour-search__field select,
+.tour-search__field input {
+  display: block;
+  width: 100%;
+  height: 52px;
+  box-sizing: border-box;
+  padding: 0 16px;
+  border: 1px solid #fdfdfd;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #fdfdfd;
+  font: 700 16px 'Nunito Sans', sans-serif;
+}
+
+.tour-search__field select option {
+  color: #1a3e3e;
+}
+
+.tour-search__select-control {
+  display: block;
+  position: relative;
+}
+
+.tour-search__select-control select {
+  appearance: none;
+  padding-right: 44px;
+}
+
+.tour-search__select-control::after {
+  content: '';
+  position: absolute;
+  top: 19px;
+  right: 19px;
+  width: 8px;
+  height: 8px;
+  border-right: 1px solid #fdfdfd;
+  border-bottom: 1px solid #fdfdfd;
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.tour-search__field input {
+  color-scheme: dark;
+}
+
+.tour-search__date-control {
+  display: block;
+  position: relative;
+}
+
+.tour-search__date-control input:invalid::-webkit-datetime-edit {
+  color: transparent;
+}
+
+.tour-search__date-placeholder {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.tour-search__date-control input:valid + .tour-search__date-placeholder {
+  display: none;
+}
+
+.tour-search__hint {
+  display: block;
+  margin: 6px 8px 0;
+  font-size: 14px;
+}
+
+.tour-search__button {
+  width: 213px;
+  height: 52px;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 4px;
+  background-color: #1a3e3e;
+  color: #fdfdfd;
+  font: 700 16px 'Nunito Sans', sans-serif;
+  cursor: pointer;
+}
+
+.site-header__inner {
+  max-width: 1180px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.site-header__brand {
+  width: 143px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.site-header__mark {
+  width: 143px;
+  height: 29px;
+  overflow: hidden;
+}
+
+.site-header__mark img {
+  display: block;
+}
+
+.site-header__name {
+  margin-top: 10px;
+  padding-left: 0.4em;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  letter-spacing: 0.4em;
+  white-space: nowrap;
+}
+
+.site-header__nav ul {
+  display: flex;
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.site-header__button {
+  width: 158px;
+  height: 44px;
+  flex-shrink: 0;
+  border: 0;
+  border-radius: 4px;
+  background-color: #fdfdfd;
+  color: #1a3e3e;
+  font: 700 16px 'Nunito Sans', sans-serif;
+  cursor: pointer;
+}
+
+@media (max-width: 1228px) {
+  .site-header__inner,
+  .hero__inner {
+    padding: 0 24px;
+  }
+
+  .hero__inner {
+    padding-top: 431px;
+  }
+
+  .tour-search__field {
+    width: auto;
+    min-width: 0;
+    flex: 1;
+  }
+}
+
+@media (max-width: 900px) {
+  .site-header {
+    height: auto;
+    padding: 20px 0;
+  }
+
+  .site-header__inner {
+    flex-wrap: wrap;
+  }
+
+  .site-header__nav {
+    order: 3;
+    width: 100%;
+  }
+
+  .site-header__nav ul {
+    flex-wrap: wrap;
+  }
+
+  .hero__inner {
+    padding-top: 260px;
+  }
+
+  .hero h1 {
+    font-size: 38px;
+  }
+
+  .tour-search {
+    flex-wrap: wrap;
+  }
+
+  .tour-search__field {
+    flex-basis: 40%;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero__inner {
+    padding-top: 140px;
+  }
+
+  .hero h1 {
+    font-size: 28px;
+  }
+
+  .hero h1 br {
+    display: none;
+  }
+
+  .tour-search {
+    padding: 24px;
+  }
+
+  .tour-search__field,
+  .tour-search__button {
+    flex-basis: 100%;
+  }
+}
