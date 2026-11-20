@@ -1,1 +1,69 @@
-<h1 style="display: flex; justify-content: center; font-family: sans-serif;">NGX SIMULATOR</h1>
+<div class="page-top">
+<header class="site-header">
+  <div class="site-header__inner">
+    <div class="site-header__brand">
+      <span class="site-header__mark">
+        <img src="/rumtibet-logo.svg" alt="" width="143" height="61" />
+      </span>
+      <span class="site-header__name">{{ companyName }}</span>
+    </div>
+
+    <nav class="site-header__nav" aria-label="Главное меню">
+      <ul>
+        <li>Главная</li>
+        <li>Про гида</li>
+        <li>Программа тура</li>
+        <li>Стоимость</li>
+        <li>Блог</li>
+        <li>Контакты</li>
+      </ul>
+    </nav>
+
+    <button class="site-header__button" type="button">Консультация</button>
+  </div>
+</header>
+
+<main>
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero__inner">
+      <h1 id="hero-title">Насладись прогулкой в горах<br />с командой единомышленников</h1>
+
+      <div class="tour-search">
+        <label class="tour-search__field">
+          <span class="tour-search__select-control">
+            <select aria-label="Локация для тура">
+              <option value="" selected>Локация для тура</option>
+              <option value="caucasus">Кавказ</option>
+              <option value="altai">Алтай</option>
+            </select>
+          </span>
+          <span class="tour-search__hint">выберите из списка</span>
+        </label>
+
+        <label class="tour-search__field">
+          <span class="tour-search__date-control">
+            <input type="date" aria-label="Дата похода" required />
+            <span class="tour-search__date-placeholder">Дата похода</span>
+          </span>
+          <span class="tour-search__hint">укажите дату</span>
+        </label>
+
+        <label class="tour-search__field">
+          <span class="tour-search__select-control">
+            <select aria-label="Участники">
+              <option value="" selected>Участники</option>
+              <option value="1">1 участник</option>
+              <option value="2">2 участника</option>
+              <option value="3">3 участника</option>
+              <option value="4">4 участника</option>
+            </select>
+          </span>
+          <span class="tour-search__hint">выберите из списка</span>
+        </label>
+
+        <button class="tour-search__button" type="button">Найти программу</button>
+      </div>
+    </div>
+  </section>
+</main>
+</div>
